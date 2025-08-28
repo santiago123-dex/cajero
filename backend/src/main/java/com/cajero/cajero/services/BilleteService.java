@@ -16,6 +16,7 @@ public class BilleteService {
         this.billeteRepository = billeteRepository;
     }
 
+    // funcion que va a retornar el saldo en total que tenemos guardao
     public int obtenerSaldo(){
         return billeteRepository.findAll().stream()
             .mapToInt(billete -> billete.getDenominacion() * billete.getCantidad())
