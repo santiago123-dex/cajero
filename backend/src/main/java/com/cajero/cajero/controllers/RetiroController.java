@@ -30,12 +30,26 @@ public class RetiroController {
         this.retiroService = retiroService;
     }
 
-    //Retiro del dinero
+
+    /**
+     * Realiza un retiro de dinero por el monto especificado.
+     * Distribuye los billetes disponibles y registra la transacción.
+     * 
+     * @param monto el valor a retirar
+     * @return un mapa donde la clave es la denominación del billete y el valor es la cantidad entregada
+     */
     @PostMapping("/{monto}")
     public Map<Integer, Integer> retirar (@PathVariable int monto){
         return retiroService.retirar(monto);
     }
 
+
+    
+    /**
+     * Obtiene el historial completo de retiros realizados.
+     * 
+     * @return una lista de objetos Retiro con la información de cada transacción
+     */
     @GetMapping
     public List<Retiro> historialRetiros() {
         return retiroRepository.findAll();

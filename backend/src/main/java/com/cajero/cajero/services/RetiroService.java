@@ -15,7 +15,6 @@ import com.cajero.cajero.repository.RetiroRepository;
 
 @Service
 public class RetiroService {
-    // el final sirve para que despues de inizializar no se puede cambiar de objeto
     private final RetiroRepository retiroRepository;
     private final BilleteRepository billeteRepository;
     private final BilleteService billeteService;
@@ -26,6 +25,16 @@ public class RetiroService {
         this.billeteService = billeteService;
     }
 
+
+     /**
+     * Realiza el retiro de un monto específico del cajero.
+     * Verifica si hay saldo suficiente y distribuye los billetes de mayor a menor denominación.
+     * Actualiza la cantidad de billetes en la base de datos y guarda el registro del retiro.
+     * 
+     * @param monto el valor a retirar
+     * @return un mapa donde la clave es la denominación del billete y el valor es la cantidad entregada
+     * @throws IllegalArgumentException si el monto es mayor al saldo disponible o no se puede cubrir con los billetes existentes
+     */
     public Map<Integer, Integer> retirar(int monto) {
         int saldo = billeteService.obtenerSaldo();
 
@@ -33,21 +42,17 @@ public class RetiroService {
             throw new IllegalArgumentException("El monto a retirar es mayor que el saldo disponible");
         }
 
-        // ordenar billetes de mayor a menor
         List<Billete> billetes = billeteRepository.findAll();
         billetes.sort((b1, b2) -> b2.getDenominacion() - b1.getDenominacion());
 
-        // Mantener el orden en que se retira
         Map<Integer, Integer> entregados = new java.util.HashMap<>();
 
-        // guardado de monto original
         int montoOriginal = monto;
 
         for (Billete billete : billetes) {
             int denom = billete.getDenominacion();
             int disponibles = billete.getCantidad();
 
-            // calcular cuanto billetes se necesitan para cubrir el monto
             int necesarios = Math.min(monto / denom, disponibles);
 
             if (necesarios > 0) {
@@ -64,13 +69,16 @@ public class RetiroService {
               throw new IllegalArgumentException("No se puede retirar con los billetes disponibles.");
         }
 
-        // Guardar el retiro en la base de datos con el monto real retirado
         Retiro retiro = new Retiro(montoOriginal, LocalDateTime.now());
         retiroRepository.save(retiro);
 
         return entregados;
     }
-    //endpoint del historial
+     /**
+     * Obtiene el historial de todos los retiros realizados.
+     * 
+     * @return una lista de objetos Retiro con la información de cada transacción
+     */
     @GetMapping
      public List<Retiro> obtenerHistorial() {
         return retiroRepository.findAll();
