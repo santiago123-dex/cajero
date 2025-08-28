@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
 import './index.css'
 import { Index } from './views/index'
-import {AppAdmin}  from './admin/AppAdmin'
 import {Retiro} from './views/Retiro'
 import { Confirmacion } from './views/Confirmacion'
+import { Detalle } from './views/Detalle'
 
 export function AppUser() {
   return (
@@ -13,9 +13,9 @@ export function AppUser() {
         <Route path="/" element={<Index />} />
         <Route path="/cantidad" element={<Retiro />} />
         <Route path='/confirmacion' element={<Confirmacion />} />
-        <Route path="/administracion" element={<AppAdmin />} />
+        <Route path='/detalle' element={<Detalle />} />
       </Routes>
-    </ div>
+    </div>
   )
 }
 

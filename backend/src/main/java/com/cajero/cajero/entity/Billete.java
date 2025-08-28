@@ -15,6 +15,10 @@ public class Billete {
     @Column(name  = "cantidad")
     private int cantidad;
 
+    public Billete(){
+        
+    }
+
     public Billete(int denominacion, int cantidad){
         this.denominacion = denominacion;
         this.cantidad = cantidad;
