@@ -16,14 +16,23 @@ public class BilleteService {
         this.billeteRepository = billeteRepository;
     }
 
-    // funcion que va a retornar el saldo en total que tenemos guardao
+    /**
+     * Calcula y retorna el saldo total disponible en el cajero.
+     * 
+     * @return el saldo total en unidades monetarias
+     */
     public int obtenerSaldo(){
         return billeteRepository.findAll().stream()
             .mapToInt(billete -> billete.getDenominacion() * billete.getCantidad())
             .sum();
     }
-
-    // Obtener los billetes disponibles
+  /**
+     * Obtiene un mapa con las denominaciones de billetes disponibles
+     * y la cantidad correspondiente de cada una.
+     * 
+     * @return un mapa donde la clave es la denominación del billete
+     *         y el valor es la cantidad disponible
+     */
     public Map<Integer, Integer> obtenerBilletesDisponibles(){
         return billeteRepository.findAll().stream()
             .collect(Collectors.toMap(Billete::getDenominacion, Billete::getCantidad));

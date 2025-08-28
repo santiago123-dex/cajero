@@ -20,11 +20,25 @@ public class BilleteController {
         this.billeteService = billeteService;
     }
 
+    
+    /**
+     * Obtiene el saldo total disponible en el cajero.
+     * 
+     * @return el saldo total en unidades monetarias
+     */
+
     @GetMapping("/saldo")
     public int obtenerSaldo(){
         return billeteService.obtenerSaldo();
     }
     
+        /**
+     * Obtiene un mapa con las denominaciones de billetes disponibles
+     * y la cantidad correspondiente de cada una.
+     * 
+     * @return un mapa donde la clave es la denominación del billete
+     *         y el valor es la cantidad disponible
+     */
     @GetMapping("/billetes")
     public Map<Integer, Integer> obtenerBilletesDisponibles(){
         return billeteService.obtenerBilletesDisponibles();
