@@ -4,6 +4,7 @@ import { Index } from './views/index'
 import {Retiro} from './views/Retiro'
 import { Confirmacion } from './views/Confirmacion'
 import { Detalle } from './views/Detalle'
+import { DetallesSaldo } from './views/DetallesSaldo'
 
 export function AppUser() {
   return (
@@ -14,6 +15,7 @@ export function AppUser() {
         <Route path="/cantidad" element={<Retiro />} />
         <Route path='/confirmacion' element={<Confirmacion />} />
         <Route path='/detalle' element={<Detalle />} />
+        <Route path='/detallesSaldo' element={<DetallesSaldo />}></Route>
       </Routes>
     </div>
   )

@@ -21,3 +21,18 @@ export async function obtenerBilletes() {
   }
   return response.json();
 }
+
+
+export async function obtenerSaldo() {
+    const response = await fetch('http://localhost:8080/api/billetes/saldo', {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    if (!response.ok) {
+        throw new Error("Error al obtener saldo");
+    }
+    return response.json();
+
+}

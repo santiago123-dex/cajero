@@ -3,6 +3,7 @@ import '../index.css'
 
 
 function CardSign(){
+
     return(
         <>
             <div className="w-[30%] flex justify-center items-center flex-col bg-[#222a33] p-6 rounded-md">
@@ -10,7 +11,7 @@ function CardSign(){
                 <h2 className="text-[#fff] text-[2rem] font-bold">Cajero Automatico</h2>
                 <p className="text-[#b4b4b4]">Seleccione la opcion para continuar</p>
                 <Link to="/cantidad" className="py-4 px-22 bg-[#48f] rounded-sm mt-6 text-white text-xl text-center cursor-pointer hover:bg-[#36c] duration-300"><button><span>$</span>Retirar dinero</button></Link>
-                <button className="py-4 px-20 bg-[#0e141b] opacity-[0.5] rounded-sm mt-6 text-white text-xl cursor-pointer hover:opacity-[0.3]"><span>$</span> Consultar Saldo</button>
+                <Link to="/detallesSaldo"><button className="py-4 px-20 bg-[#0e141b] opacity-[0.5] rounded-sm mt-6 text-white text-xl cursor-pointer hover:opacity-[0.3]"><span>$</span> Consultar Saldo</button></Link>
 
             </div>
         </>

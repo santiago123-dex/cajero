@@ -11,7 +11,7 @@ public class RetiroDTO {
     public RetiroDTO(int monto, LocalDateTime fecha){
         this.monto = monto;
         this.fecha = fecha;
-    }
+    }   
 
     public int getMonto() {
         return monto;
